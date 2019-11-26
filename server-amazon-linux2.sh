@@ -86,7 +86,7 @@ function createVhost(){
     fi
   done
 
-  VHOST_FILE = /etc/httpd/conf.d/vhost_{$PROJECT}.conf;
+  VHOST_FILE=/etc/httpd/conf.d/vhost_{$PROJECT}.conf;
 
   rm {$VHOST_FILE} -f
   touch {$VHOST_FILE}
