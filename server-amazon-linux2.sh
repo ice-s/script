@@ -86,18 +86,18 @@ function createVhost(){
     fi
   done
 
-  VHOST_FILE=/etc/httpd/conf.d/vhost_{$PROJECT}.conf;
+  VHOST_FILE=/etc/httpd/conf.d/vhost_$PROJECT.conf;
 
-  rm {$VHOST_FILE} -f
-  touch {$VHOST_FILE}
-  chmod +w {$VHOST_FILE}
-  echo '<VirtualHost *:80>'  >> {$VHOST_FILE}
-  echo '    ServerAdmin admin@test.io'  >> {$VHOST_FILE}
-  echo '    DocumentRoot /var/www/project/public'  >> {$VHOST_FILE}
-  echo '    <Directory /var/www/project/public>'  >> {$VHOST_FILE}
-  echo '        AllowOverride All'  >> {$VHOST_FILE}
-  echo '    </Directory>'  >> {$VHOST_FILE}
-  echo '</VirtualHost>'  >> {$VHOST_FILE}
+  rm $VHOST_FILE -f
+  touch $VHOST_FILE
+  chmod +w $VHOST_FILE
+  echo '<VirtualHost *:80>'  >> $VHOST_FILE
+  echo '    ServerAdmin admin@test.io'  >> $VHOST_FILE
+  echo '    DocumentRoot /var/www/project/public'  >> $VHOST_FILE
+  echo '    <Directory /var/www/project/public>'  >> $VHOST_FILE
+  echo '        AllowOverride All'  >> $VHOST_FILE
+  echo '    </Directory>'  >> $VHOST_FILE
+  echo '</VirtualHost>'  >> $VHOST_FILE
   systemctl restart httpd.service
 }
 
