@@ -43,5 +43,37 @@ else
     exit 1;
 fi
 
-echo '>> OS : ${OS}'
-echo '>> OS version : ${OS_VER}'
+echo ">> OS : $OS"
+echo ">> OS Version : $OS_VER"
+
+exit 1;
+
+yum update -y
+echo '>> Setting timezone to America/New_York and installing NTP'
+
+timedatectl set-timezone Asia/Ho_Chi_Minh
+yum install -y ntp
+systemctl start ntpd
+systemctl enable ntpd
+
+echo '>> Configuring swap'
+fallocate -l 1G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
+
+echo '>> Installing Apache2'
+yum install -y httpd
+systemctl start httpd.service
+systemctl enable httpd.service
+
+echo '>> Installing PHP7.2'
+#EC2 :  Amazon Linux 2 AMI
+amazon-linux-extras install -y php7.2
+
+echo '>> Add your user (in this case, ec2-user) to the apache group.'
+usermod -a -G apache ec2-user
+
+echo '>> Change the group ownership of /var/www and its contents to the apache group.'
+chown -R ec2-user:apache /var/www
