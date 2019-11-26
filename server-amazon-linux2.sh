@@ -57,7 +57,7 @@ fi
 echo ">> OS : $OS"
 echo ">> OS Version : $OS_VER"
 
-if OS="Amazon Linux AMI" then
+if OS=="Amazon Linux AMI"; then
   yum install -y httpd24 php72 php72-mysqlnd
 
   echo '>> Add your user (in this case, ec2-user) to the apache group.'
@@ -67,7 +67,7 @@ if OS="Amazon Linux AMI" then
   chown -R ec2-user:apache /var/www
 fi
 
-if OS="Amazon Linux 2" then
+if OS=="Amazon Linux 2"; then
   echo '>> Installing Apache2'
   yum install -y httpd
   systemctl start httpd.service
