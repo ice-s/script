@@ -42,6 +42,32 @@ fi
 echo ">> OS : $OS"
 echo ">> OS Version : $OS_VER"
 
+if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
+then
+  yum update -y
+  createSwap
+else
+  exit 1;
+fi
+
+if [[ $OS == 'Amazon Linux AMI' ]];
+then
+  yum install -y httpd24 php72 php72-mysqlnd
+  setPermission
+fi
+
+if [[ $OS == 'Amazon Linux 2' ]];
+then
+  echo '>> Installing Apache2'
+  yum install -y httpd
+  systemctl start httpd.service
+  systemctl enable httpd.service
+
+  echo '>> Installing PHP7.2'
+  amazon-linux-extras install -y php7.2
+  setPermission
+fi
+
 function setPermission() {
   echo '>> Add your user (in this case, ec2-user) to the apache group.'
   usermod -a -G apache ec2-user
@@ -69,30 +95,3 @@ function setTimeZone(){
   systemctl start ntpd
   systemctl enable ntpd
 }
-
-if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
-then
-  yum update -y
-  createSwap
-else
-  exit 1;
-fi
-
-if [[ $OS == 'Amazon Linux AMI' ]];
-then
-  yum install -y httpd24 php72 php72-mysqlnd
-  setPermission
-fi
-
-if [[ $OS == 'Amazon Linux 2' ]];
-then
-  echo '>> Installing Apache2'
-  yum install -y httpd
-  systemctl start httpd.service
-  systemctl enable httpd.service
-
-  echo '>> Installing PHP7.2'
-  amazon-linux-extras install -y php7.2
-  setPermission
-fi
-
