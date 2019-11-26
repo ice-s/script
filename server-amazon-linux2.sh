@@ -45,6 +45,7 @@ echo ">> OS Version : $OS_VER"
 if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
 then
   yum update -y
+  yum install git -y
   createSwap
 else
   exit 1;
@@ -54,6 +55,7 @@ if [[ $OS == 'Amazon Linux AMI' ]];
 then
   yum install -y httpd24 php72 php72-mysqlnd
   setPermission
+  createVhost
 fi
 
 if [[ $OS == 'Amazon Linux 2' ]];
@@ -66,6 +68,7 @@ then
   echo '>> Installing PHP7.2'
   amazon-linux-extras install -y php7.2
   setPermission
+  createVhost
 fi
 
 function setPermission() {
@@ -94,4 +97,17 @@ function setTimeZone(){
   yum install -y ntp
   systemctl start ntpd
   systemctl enable ntpd
+}
+
+function createVhost(){
+  rm /etc/httpd/conf.d/ices.conf -f
+  touch /etc/httpd/conf.d/ices.conf
+  chmod +w /etc/httpd/conf.d/ices.conf
+  echo '<VirtualHost *:80>'  >> /etc/httpd/conf.d/vhost.conf
+  echo '    ServerAdmin admin@test.io'  >> /etc/httpd/conf.d/vhost.conf
+  echo '    DocumentRoot /var/www/project/public'  >> /etc/httpd/conf.d/vhost.conf
+  echo '    <Directory /var/www/project/public>'  >> /etc/httpd/conf.d/vhost.conf
+  echo '        AllowOverride All'  >> /etc/httpd/conf.d/vhost.conf
+  echo '    </Directory>'  >> /etc/httpd/conf.d/vhost.conf
+  echo '</Directory>'  >> /etc/httpd/conf.d/vhost.conf
 }
