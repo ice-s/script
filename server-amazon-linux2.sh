@@ -80,13 +80,13 @@ function createVhost(){
   while true; do
     inputProject
 
-    if [[ $PROJECT]]
+    if [[ $PROJECT ]]
     then
       break
     fi
   done
 
-  file = /etc/httpd/conf.d/vhost_${PROJECT}.conf;
+  file = /etc/httpd/conf.d/vhost_{$PROJECT}.conf;
 
   rm $file -f
   touch $file
