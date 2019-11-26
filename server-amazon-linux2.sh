@@ -100,6 +100,7 @@ function setupProject(){
   echo '</VirtualHost>'  >> $VHOST_FILE
   systemctl restart httpd.service
 
+  mkdir /var/www/$PROJECT
   touch /var/www/$PROJECT/index.php
   echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/index.php
 }
