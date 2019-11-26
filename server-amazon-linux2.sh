@@ -72,16 +72,16 @@ function setTimeZone(){
 }
 
 function createVhost(){
-  rm /etc/httpd/conf.d/ices.conf -f
-  touch /etc/httpd/conf.d/ices.conf
-  chmod +w /etc/httpd/conf.d/ices.conf
-  echo '<VirtualHost *:80>'  >> /etc/httpd/conf.d/vhost.conf
-  echo '    ServerAdmin admin@test.io'  >> /etc/httpd/conf.d/vhost.conf
-  echo '    DocumentRoot /var/www/project/public'  >> /etc/httpd/conf.d/vhost.conf
-  echo '    <Directory /var/www/project/public>'  >> /etc/httpd/conf.d/vhost.conf
-  echo '        AllowOverride All'  >> /etc/httpd/conf.d/vhost.conf
-  echo '    </Directory>'  >> /etc/httpd/conf.d/vhost.conf
-  echo '</VirtualHost>'  >> /etc/httpd/conf.d/vhost.conf
+  rm /etc/httpd/conf.d/vhost_a.conf -f
+  touch /etc/httpd/conf.d/vhost_a.conf
+  chmod +w /etc/httpd/conf.d/vhost_a.conf
+  echo '<VirtualHost *:80>'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '    ServerAdmin admin@test.io'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '    DocumentRoot /var/www/project/public'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '    <Directory /var/www/project/public>'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '        AllowOverride All'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '    </Directory>'  >> /etc/httpd/conf.d/vhost_a.conf
+  echo '</VirtualHost>'  >> /etc/httpd/conf.d/vhost_a.conf
 }
 
 if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
