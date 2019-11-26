@@ -19,15 +19,15 @@ if cat /etc/*release | grep CentOS > /dev/null 2>&1; then
     elif [ $(rpm --eval '%{centos_ver}') == '8' ] ;then
         OS_VER="CentOS8"
     fi
-elif cat /etc/*release | grep ^NAME | grep Ubuntu > /dev/null 2>&1; then
-    OS="Ubuntu"
-    if [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'trusty' ] ;then
-        OS_VER="Ubuntu14"
-    elif [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'xenial' ] ;then
-        OS_VER="Ubuntu16"
-    elif [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'bionic' ] ;then
-        OS_VER="Ubuntu18"
-    fi
+#elif cat /etc/*release | grep ^NAME | grep Ubuntu > /dev/null 2>&1; then
+#    OS="Ubuntu"
+#    if [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'trusty' ] ;then
+#        OS_VER="Ubuntu14"
+#    elif [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'xenial' ] ;then
+#        OS_VER="Ubuntu16"
+#    elif [ $(lsb_release -c | grep Codename | awk '{print $2}') == 'bionic' ] ;then
+#        OS_VER="Ubuntu18"
+#    fi
 elif cat /etc/*release | grep ^NAME | grep 'Amazon Linux AMI' > /dev/null 2>&1; then
     OS="Amazon Linux AMI"
     OS_VER="CentOS7"
@@ -76,7 +76,7 @@ then
   createSwap
 else
   exit 1;
-if
+fi
 
 if [[ $OS == 'Amazon Linux AMI' ]];
 then
