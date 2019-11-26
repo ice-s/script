@@ -116,8 +116,8 @@ fi
 if [[ $OS == 'Amazon Linux AMI' ]];
 then
   yum install -y httpd24 php72 php72-mysqlnd
-  setPermission
   setupProject
+  setPermission
 fi
 
 if [[ $OS == 'Amazon Linux 2' ]];
@@ -129,7 +129,7 @@ then
 
   echo '>> Installing PHP7.2'
   amazon-linux-extras install -y php7.2
-  setPermission
   setupProject
+  setPermission
 fi
 
