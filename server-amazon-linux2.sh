@@ -95,3 +95,4 @@ then
   amazon-linux-extras install -y php7.2
   setPermission
 fi
+
