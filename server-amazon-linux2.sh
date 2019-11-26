@@ -109,5 +109,5 @@ function createVhost(){
   echo '    <Directory /var/www/project/public>'  >> /etc/httpd/conf.d/vhost.conf
   echo '        AllowOverride All'  >> /etc/httpd/conf.d/vhost.conf
   echo '    </Directory>'  >> /etc/httpd/conf.d/vhost.conf
-  echo '</Directory>'  >> /etc/httpd/conf.d/vhost.conf
+  echo '</VirtualHost>'  >> /etc/httpd/conf.d/vhost.conf
 }
