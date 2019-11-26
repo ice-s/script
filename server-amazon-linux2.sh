@@ -71,17 +71,34 @@ function setTimeZone(){
   systemctl enable ntpd
 }
 
+inputProject() {
+  echo -n "Enter name project: "
+  read PROJECT
+}
+
 function createVhost(){
-  rm /etc/httpd/conf.d/vhost_a.conf -f
-  touch /etc/httpd/conf.d/vhost_a.conf
-  chmod +w /etc/httpd/conf.d/vhost_a.conf
-  echo '<VirtualHost *:80>'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '    ServerAdmin admin@test.io'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '    DocumentRoot /var/www/project/public'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '    <Directory /var/www/project/public>'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '        AllowOverride All'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '    </Directory>'  >> /etc/httpd/conf.d/vhost_a.conf
-  echo '</VirtualHost>'  >> /etc/httpd/conf.d/vhost_a.conf
+  while true; do
+    inputProject
+
+    if [[ $PROJECT]]
+    then
+      break
+    fi
+  done
+
+  file = /etc/httpd/conf.d/vhost_${PROJECT}.conf;
+
+  rm ${file} -f
+  touch ${file}
+  chmod +w ${file}
+  echo '<VirtualHost *:80>'  >> ${file}
+  echo '    ServerAdmin admin@test.io'  >> ${file}
+  echo '    DocumentRoot /var/www/project/public'  >> ${file}
+  echo '    <Directory /var/www/project/public>'  >> ${file}
+  echo '        AllowOverride All'  >> ${file}
+  echo '    </Directory>'  >> ${file}
+  echo '</VirtualHost>'  >> ${file}
+  systemctl restart httpd.service
 }
 
 if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
