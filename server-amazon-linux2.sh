@@ -93,8 +93,8 @@ function setupProject(){
   chmod +w $VHOST_FILE
   echo '<VirtualHost *:80>'  >> $VHOST_FILE
   echo '    ServerAdmin admin@test.io'  >> $VHOST_FILE
-  echo '    DocumentRoot /var/www/project/public'  >> $VHOST_FILE
-  echo '    <Directory /var/www/project/public>'  >> $VHOST_FILE
+  echo "    DocumentRoot /var/www/$PROJECT/public"  >> $VHOST_FILE
+  echo "    <Directory /var/www/$PROJECT/public>"  >> $VHOST_FILE
   echo '        AllowOverride All'  >> $VHOST_FILE
   echo '    </Directory>'  >> $VHOST_FILE
   echo '</VirtualHost>'  >> $VHOST_FILE
