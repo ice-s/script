@@ -42,7 +42,7 @@ fi
 echo ">> OS : $OS"
 echo ">> OS Version : $OS_VER"
 
-if [ $OS_VER == 'CentOS6' ] || [ $OS_VER == 'CentOS7' ] || [ $OS_VER == 'CentOS8' ] ;
+if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
 then
   yum update -y
   echo '>> Setting timezone to America/New_York and installing NTP'
