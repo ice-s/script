@@ -62,7 +62,7 @@ then
   fi
 fi
 
-if [ $OS == 'Amazon Linux AMI' ];
+if [[ $OS == 'Amazon Linux AMI' ]];
 then
   yum install -y httpd24 php72 php72-mysqlnd
 
@@ -73,7 +73,7 @@ then
   chown -R ec2-user:apache /var/www
 fi
 
-if [ $OS == 'Amazon Linux 2' ];
+if [[ $OS == 'Amazon Linux 2' ]];
 then
   echo '>> Installing Apache2'
   yum install -y httpd
