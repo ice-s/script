@@ -43,5 +43,5 @@ else
     exit 1;
 fi
 
-echo '>> OS : $OS'
-echo '>> OS version : $OS_VER'
+echo '>> OS : ${OS}'
+echo '>> OS version : ${OS_VER}'
