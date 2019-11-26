@@ -100,9 +100,9 @@ function setupProject(){
   echo '</VirtualHost>'  >> $VHOST_FILE
   systemctl restart httpd.service
 
-  mkdir /var/www/$PROJECT
-  touch /var/www/$PROJECT/index.php
-  echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/index.php
+  mkdir /var/www/$PROJECT/public
+  touch /var/www/$PROJECT/public/index.php
+  echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/public/index.php
 }
 
 if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
