@@ -116,7 +116,7 @@ fi
 
 if [[ $OS == 'Amazon Linux AMI' ]];
 then
-  yum install -y httpd24 php72 php72-mysqlnd
+  yum install -y httpd24 php72 php72-mysqlnd php72-mbstring php72-xml
   setupProject
   setPermission
 fi
@@ -129,7 +129,7 @@ then
   systemctl enable httpd.service
 
   echo '>> Installing PHP7.2'
-  amazon-linux-extras install -y php7.2
+  amazon-linux-extras install -y php7.2 php-mbstring php-xml
   setupProject
   setPermission
 fi
