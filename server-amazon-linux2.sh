@@ -117,6 +117,9 @@ fi
 if [[ $OS == 'Amazon Linux AMI' ]];
 then
   yum install -y httpd24 php72 php72-mysqlnd php72-mbstring php72-xml
+  cd /
+  curl -sS https://getcomposer.org/installer -o composer-setup.php
+  php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   setupProject
   setPermission
 fi
@@ -130,6 +133,9 @@ then
 
   echo '>> Installing PHP7.2'
   amazon-linux-extras install -y php7.2 php-mbstring php-xml
+  cd /
+  curl -sS https://getcomposer.org/installer -o composer-setup.php
+  php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   setupProject
   setPermission
 fi
