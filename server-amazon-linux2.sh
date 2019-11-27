@@ -132,7 +132,8 @@ then
   systemctl enable httpd.service
 
   echo '>> Installing PHP7.2'
-  amazon-linux-extras install -y php7.2 php-mbstring php-xml
+  amazon-linux-extras install -y php7.2
+  yum install -y php-mbstring php-xml
   cd /
   curl -sS https://getcomposer.org/installer -o composer-setup.php
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
