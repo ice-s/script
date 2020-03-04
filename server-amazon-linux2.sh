@@ -64,11 +64,12 @@ function createSwap(){
 }
 
 function setTimeZone(){
-  echo '>> Setting timezone to America/New_York and installing NTP'
-  timedatectl set-timezone Asia/Ho_Chi_Minh
-  yum install -y ntp
-  systemctl start ntpd
-  systemctl enable ntpd
+  #echo '>> Setting timezone to America/New_York and installing NTP'
+  #timedatectl set-timezone Asia/Ho_Chi_Minh
+  #yum install -y ntp
+  #systemctl start ntpd
+  #systemctl enable ntpd
+  cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 }
 
 inputProject() {
