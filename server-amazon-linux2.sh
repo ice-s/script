@@ -123,6 +123,8 @@ then
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   setupProject
   setPermission
+  curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+  yum install -y nodejs
 fi
 
 if [[ $OS == 'Amazon Linux 2' ]];
@@ -140,5 +142,7 @@ then
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   setupProject
   setPermission
+  curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+  yum install -y nodejs
 fi
 
