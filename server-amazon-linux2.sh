@@ -134,7 +134,7 @@ then
 
   echo '>> Installing PHP7.2'
   amazon-linux-extras install -y php7.2
-  yum install -y php-mbstring php-xml
+  yum install -y php-mbstring php-xml php-gd php-zip
   cd /
   curl -sS https://getcomposer.org/installer -o composer-setup.php
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
