@@ -1,6 +1,6 @@
 #!/bin/sh
 clear
-figlet -f slant TD Honban
+figlet -f slant Your Name
 printf "\n"
 printf "\t- %s\n\t- Kernel %s\n" "$(awk -F= '$1=="PRETTY_NAME" { print $2 ;}' /etc/os-release)" "$(uname -r)"
 printf "\n"
