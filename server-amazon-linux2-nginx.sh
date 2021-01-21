@@ -49,6 +49,9 @@ function setPermission() {
 
   #echo '>> Change the group ownership of /var/www and its contents to the apache group.'
   chown -R ec2-user:nginx /var/www
+  
+  sudo wget https://raw.githubusercontent.com/ice-s/script/master/nginx.conf
+  sudo mv -f ./nginx.conf /etc/nginx/nginx.conf
 }
 
 function createSwap(){
@@ -96,6 +99,7 @@ if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'Ce
 then
   yum update -y
   yum install git -y
+  yum install figlet -y
   createSwap
 else
   exit 1;
