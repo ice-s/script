@@ -89,7 +89,36 @@ function setupProject(){
       break
     fi
   done
+  
+  NGINX_CONFIG_FILE=/etc/nginx/conf.d/$PROJECT.conf;
 
+  rm $NGINX_CONFIG_FILE -f
+  touch $NGINX_CONFIG_FILE
+  chmod +w $NGINX_CONFIG_FILE
+  
+  echo 'server {'  >> $NGINX_CONFIG_FILE
+  echo '  listen 80;'  >> $NGINX_CONFIG_FILE
+  echo '  index index.php index.html;'  >> $NGINX_CONFIG_FILE
+  echo '  error_log  /var/log/nginx/error.log;'  >> $NGINX_CONFIG_FILE
+  echo '  access_log /var/log/nginx/access.log;'  >> $NGINX_CONFIG_FILE
+  echo '  root /var/www/$PROJECT/public;'  >> $NGINX_CONFIG_FILE
+  echo '  client_max_body_size 40M;'  >> $NGINX_CONFIG_FILE
+  echo '  location ~ \.php$ {'  >> $NGINX_CONFIG_FILE
+  echo '      try_files $uri =404;'  >> $NGINX_CONFIG_FILE
+  echo '      fastcgi_split_path_info ^(.+\.php)(/.+)$;'  >> $NGINX_CONFIG_FILE
+  echo '      fastcgi_pass localhost:9000;'  >> $NGINX_CONFIG_FILE
+  echo '      fastcgi_index index.php;'  >> $NGINX_CONFIG_FILE
+  echo '      include fastcgi_params;'  >> $NGINX_CONFIG_FILE
+  echo '      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'  >> $NGINX_CONFIG_FILE
+  echo '      fastcgi_param PATH_INFO $fastcgi_path_info;'  >> $NGINX_CONFIG_FILE
+  echo '  }'  >> $NGINX_CONFIG_FILE
+  echo '  location / {'  >> $NGINX_CONFIG_FILE
+  echo '      try_files $uri $uri/ /index.php?$query_string;'  >> $NGINX_CONFIG_FILE
+  echo '      gzip_static on;'  >> $NGINX_CONFIG_FILE
+  echo '  }'  >> $NGINX_CONFIG_FILE
+  echo '}'  >> $NGINX_CONFIG_FILE
+
+  
   mkdir -p /var/www/$PROJECT/public
   touch /var/www/$PROJECT/public/index.php
   echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/public/index.php
