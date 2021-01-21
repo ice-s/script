@@ -44,8 +44,8 @@ echo ">> OS Version : $OS_VER"
 
 
 function setPermission() {
-  #echo '>> Add your user (in this case, ec2-user) to the apache group.'
-  #usermod -a -G nginx ec2-user
+  echo '>> Add your user (in this case, ec2-user) to the apache group.'
+  usermod -a -G nginx ec2-user
 
   #echo '>> Change the group ownership of /var/www and its contents to the apache group.'
   chown -R ec2-user:nginx /var/www
@@ -58,7 +58,7 @@ function createSwap(){
   isSwapOn=$(swapon -s | tail -1)
   if [[ "$isSwapOn" == "" ]]; then
     echo '>> Configuring swap'
-    fallocate -l 1G /swapfile
+    fallocate -l 2G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
@@ -102,23 +102,12 @@ function setupProject(){
   echo '  error_log  /var/log/nginx/error.log;'  >> $NGINX_CONFIG_FILE
   echo '  access_log /var/log/nginx/access.log;'  >> $NGINX_CONFIG_FILE
   echo '  root /var/www/$PROJECT/public;'  >> $NGINX_CONFIG_FILE
-  echo '  client_max_body_size 40M;'  >> $NGINX_CONFIG_FILE
-  echo '  location ~ \.php$ {'  >> $NGINX_CONFIG_FILE
-  echo '      try_files $uri =404;'  >> $NGINX_CONFIG_FILE
-  echo '      fastcgi_split_path_info ^(.+\.php)(/.+)$;'  >> $NGINX_CONFIG_FILE
-  echo '      fastcgi_pass localhost:9000;'  >> $NGINX_CONFIG_FILE
-  echo '      fastcgi_index index.php;'  >> $NGINX_CONFIG_FILE
-  echo '      include fastcgi_params;'  >> $NGINX_CONFIG_FILE
-  echo '      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'  >> $NGINX_CONFIG_FILE
-  echo '      fastcgi_param PATH_INFO $fastcgi_path_info;'  >> $NGINX_CONFIG_FILE
-  echo '  }'  >> $NGINX_CONFIG_FILE
-  echo '  location / {'  >> $NGINX_CONFIG_FILE
-  echo '      try_files $uri $uri/ /index.php?$query_string;'  >> $NGINX_CONFIG_FILE
-  echo '      gzip_static on;'  >> $NGINX_CONFIG_FILE
-  echo '  }'  >> $NGINX_CONFIG_FILE
+  echo '  client_max_body_size 100M;'  >> $NGINX_CONFIG_FILE
+  echo '  include /etc/nginx/default.d/*.conf;'  >> $NGINX_CONFIG_FILE
+  echo 'location / {'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
-
   
+  rm -rf /var/www/$PROJECT
   mkdir -p /var/www/$PROJECT/public
   touch /var/www/$PROJECT/public/index.php
   echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/public/index.php
@@ -161,6 +150,14 @@ then
   echo '>> Installing PHP7.4'
   amazon-linux-extras install -y php7.4
   yum install -y php-mbstring php-xml php-gd php-zip php-fpm
+  
+  #/etc/php-fpm.d/www.conf
+  #
+  #listen.owner = ec2-user
+  #listen.group = nginx
+  #listen.mode = 0660
+  #
+  
   cd /
   curl -sS https://getcomposer.org/installer -o composer-setup.php
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
