@@ -49,9 +49,6 @@ function setPermission() {
 
   #echo '>> Change the group ownership of /var/www and its contents to the apache group.'
   chown -R ec2-user:nginx /var/www
-  
-  sudo wget https://raw.githubusercontent.com/ice-s/script/master/nginx.conf
-  sudo mv -f ./nginx.conf /etc/nginx/nginx.conf
 }
 
 function createSwap(){
@@ -108,6 +105,10 @@ function setupProject(){
   mkdir -p /var/www/$PROJECT/public
   touch /var/www/$PROJECT/public/index.php
   echo "<?php phpinfo();?>" >>  /var/www/$PROJECT/public/index.php
+  
+  sudo wget https://raw.githubusercontent.com/ice-s/script/master/nginx.conf
+  sudo mv -f ./nginx.conf /etc/nginx/nginx.conf
+  systemctl restart nginx
 }
 
 if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'CentOS8' ]] ;
