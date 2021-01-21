@@ -104,6 +104,7 @@ function setupProject(){
   echo "  root /var/www/$PROJECT/public;"  >> $NGINX_CONFIG_FILE
   echo '  client_max_body_size 100M;'  >> $NGINX_CONFIG_FILE
   echo '  include /etc/nginx/default.d/*.conf;'  >> $NGINX_CONFIG_FILE
+  echo '}'  >> $NGINX_CONFIG_FILE
   echo 'location / {'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
   
