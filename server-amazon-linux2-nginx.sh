@@ -44,11 +44,11 @@ echo ">> OS Version : $OS_VER"
 
 
 function setPermission() {
-  echo '>> Add your user (in this case, ec2-user) to the apache group.'
-  usermod -a -G apache ec2-user
+  #echo '>> Add your user (in this case, ec2-user) to the apache group.'
+  #usermod -a -G nginx ec2-user
 
-  echo '>> Change the group ownership of /var/www and its contents to the apache group.'
-  chown -R ec2-user:apache /var/www
+  #echo '>> Change the group ownership of /var/www and its contents to the apache group.'
+  chown -R ec2-user:nginx /var/www
 }
 
 function createSwap(){
@@ -103,7 +103,7 @@ fi
 
 if [[ $OS == 'Amazon Linux AMI' ]];
 then
-  yum install -y nginx php72 php72-mysqlnd php72-mbstring php72-xml
+  yum install -y nginx php74 php74-mysqlnd php74-mbstring php74-xml php74-fpm
   systemctl start nginx
   systemctl enable nginx
   cd /
@@ -125,9 +125,9 @@ then
   systemctl start nginx
   systemctl enable nginx
 
-  echo '>> Installing PHP7.2'
-  amazon-linux-extras install -y php7.2
-  yum install -y php-mbstring php-xml php-gd php-zip
+  echo '>> Installing PHP7.4'
+  amazon-linux-extras install -y php7.4
+  yum install -y php-mbstring php-xml php-gd php-zip php-fpm
   cd /
   curl -sS https://getcomposer.org/installer -o composer-setup.php
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
