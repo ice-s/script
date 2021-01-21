@@ -101,7 +101,7 @@ function setupProject(){
   echo '  index index.php index.html;'  >> $NGINX_CONFIG_FILE
   echo '  error_log  /var/log/nginx/error.log;'  >> $NGINX_CONFIG_FILE
   echo '  access_log /var/log/nginx/access.log;'  >> $NGINX_CONFIG_FILE
-  echo '  root /var/www/$PROJECT/public;'  >> $NGINX_CONFIG_FILE
+  echo "  root /var/www/$PROJECT/public;"  >> $NGINX_CONFIG_FILE
   echo '  client_max_body_size 100M;'  >> $NGINX_CONFIG_FILE
   echo '  include /etc/nginx/default.d/*.conf;'  >> $NGINX_CONFIG_FILE
   echo 'location / {'  >> $NGINX_CONFIG_FILE
