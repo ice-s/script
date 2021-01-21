@@ -67,11 +67,6 @@ function createSwap(){
 }
 
 function setTimeZone(){
-  #echo '>> Setting timezone to America/New_York and installing NTP'
-  #timedatectl set-timezone Asia/Ho_Chi_Minh
-  #yum install -y ntp
-  #systemctl start ntpd
-  #systemctl enable ntpd
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 }
 
@@ -144,7 +139,7 @@ fi
 
 if [[ $OS == 'Amazon Linux 2' ]];
 then
-  echo '>> Installing Apache2'
+  echo '>> Installing Nginx'
   yum install -y nginx
   systemctl start nginx
   systemctl enable nginx
