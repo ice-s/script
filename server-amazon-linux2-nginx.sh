@@ -107,6 +107,7 @@ function setupProject(){
   echo 'location / {'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
   
+  systemctl restart nginx
   rm -rf /var/www/$PROJECT
   mkdir -p /var/www/$PROJECT/public
   touch /var/www/$PROJECT/public/index.php
