@@ -97,6 +97,8 @@ function setupProject(){
   echo '  client_max_body_size 100M;'  >> $NGINX_CONFIG_FILE
   echo '  include /etc/nginx/default.d/*.conf;'  >> $NGINX_CONFIG_FILE
   echo '  location / {'  >> $NGINX_CONFIG_FILE
+  echo '    try_files $uri $uri/ /index.php?$query_string;'  >> $NGINX_CONFIG_FILE
+  echo '    gzip_static on;'  >> $NGINX_CONFIG_FILE
   echo '  }'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
   
