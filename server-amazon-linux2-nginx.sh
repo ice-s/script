@@ -149,7 +149,7 @@ then
 
   echo '>> Installing PHP7.4'
   amazon-linux-extras install -y php7.4
-  yum install -y php-mbstring php-xml php-gd php-zip php-fpm
+  yum install -y php-mbstring php-xml php-gd php-zip php-fpm php-redis
   
   #/etc/php-fpm.d/www.conf
   #
