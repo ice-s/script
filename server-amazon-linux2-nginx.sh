@@ -137,8 +137,9 @@ then
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer
   setupProject
   setPermission
-  curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+  curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
   yum install -y nodejs
+  npm install pm2 -g
   amazon-linux-extras install epel
   yum install redis -y
   systemctl start redis.service
@@ -168,8 +169,9 @@ then
   setupProject
   setPermission
   
-  curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+  curl -sL https://deb.nodesource.com/setup_12.x | bash -
   yum install -y nodejs
+  npm install pm2 -g
   
   amazon-linux-extras install epel
   yum install redis -y
