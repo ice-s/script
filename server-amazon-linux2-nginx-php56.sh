@@ -121,7 +121,7 @@ then
   yum install figlet -y
   yum install htop -y
   cd /etc/profile.d 
-  sudo wget https://raw.githubusercontent.com/ice-s/script/master/greeting.sh
+  sudo wget -O https://raw.githubusercontent.com/ice-s/script/master/greeting.sh
   sudo chmod +x greeting.sh
   createSwap
 else
@@ -131,7 +131,7 @@ fi
 if [[ $OS == 'Amazon Linux 2' ]];
 then
   echo '>> Installing Nginx'
-  yum install -y nginx
+  amazon-linux-extras install nginx1
   systemctl start nginx
   systemctl enable nginx
 
