@@ -118,9 +118,9 @@ then
   yum update -y
   yum install git -y
   yum install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/f/figlet-2.2.5-9.el7.x86_64.rpm -y
-  yum install figlet -y
+  #yum install figlet -y
   yum install htop -y
-  cd /etc/profile.d 
+  #cd /etc/profile.d 
   sudo wget https://raw.githubusercontent.com/ice-s/script/master/greeting.sh
   sudo mv -f ./greeting.sh /etc/profile.d/greeting.sh
   sudo chmod +x /etc/profile.d/greeting.sh
@@ -137,11 +137,23 @@ then
   systemctl enable nginx
 
   echo '>> Installing PHP5.6'
-  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
-  yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
-  yum install yum-utils -y
-  yum-config-manager --enable remi-php56
-  yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo php-fpm php-redis php-xml php-mbstring
+  #https://webtatic.com/packages/php56/
+  yum install epel-release
+  rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+  yum install -y php56w
+  yum install -y php56w-fpm
+  yum install -y php56w-gd
+  yum install -y php56w-mysql
+  yum install -y php56w-mbstring
+  yum install -y php56w-ldap
+  yum install -y php-redis
+  yum install -y php56w-xml
+  yum install -y php56w-intl
+  yum install -y php56w-bcmath
+  
+  #yum install -y yum-plugin-replace
+  #yum replace php-common --replace-with=php56w-common
+
   
   #/etc/php-fpm.d/www.conf
   #
