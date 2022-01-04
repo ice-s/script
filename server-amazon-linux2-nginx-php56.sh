@@ -100,6 +100,15 @@ function setupProject(){
   echo '    try_files $uri $uri/ /index.php?$query_string;'  >> $NGINX_CONFIG_FILE
   echo '    gzip_static on;'  >> $NGINX_CONFIG_FILE
   echo '  }'  >> $NGINX_CONFIG_FILE
+  echo '  location ~ \.php$ {'  >> $NGINX_CONFIG_FILE
+  echo '        try_files $uri =404;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_split_path_info ^(.+\.php)(/.+)$;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_pass php-akizero:9000;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_index index.php;'  >> $NGINX_CONFIG_FILE
+  echo '        include fastcgi_params;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_param PATH_INFO $fastcgi_path_info;'  >> $NGINX_CONFIG_FILE
+  echo '  }'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
   
   systemctl restart nginx
