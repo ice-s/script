@@ -121,7 +121,7 @@ then
   yum install figlet -y
   yum install htop -y
   cd /etc/profile.d 
-  sudo wget -O https://raw.githubusercontent.com/ice-s/script/master/greeting.sh
+  sudo wget -O greeting.sh https://raw.githubusercontent.com/ice-s/script/master/greeting.sh
   sudo chmod +x greeting.sh
   createSwap
 else
