@@ -103,7 +103,7 @@ function setupProject(){
   echo '  location ~ \.php$ {'  >> $NGINX_CONFIG_FILE
   echo '        try_files $uri =404;'  >> $NGINX_CONFIG_FILE
   echo '        fastcgi_split_path_info ^(.+\.php)(/.+)$;'  >> $NGINX_CONFIG_FILE
-  echo '        fastcgi_pass php-akizero:9000;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_pass localhost:9000;'  >> $NGINX_CONFIG_FILE
   echo '        fastcgi_index index.php;'  >> $NGINX_CONFIG_FILE
   echo '        include fastcgi_params;'  >> $NGINX_CONFIG_FILE
   echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'  >> $NGINX_CONFIG_FILE
@@ -126,7 +126,7 @@ if [[ $OS_VER == 'CentOS6' ]] || [[ $OS_VER == 'CentOS7' ]] || [[ $OS_VER == 'Ce
 then
   yum update -y
   yum install git -y
-  yum install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/f/figlet-2.2.5-9.el7.x86_64.rpm -y
+  #yum install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/f/figlet-2.2.5-9.el7.x86_64.rpm -y
   #yum install figlet -y
   yum install htop -y
   #cd /etc/profile.d 
@@ -160,8 +160,8 @@ then
   yum install -y php56w-intl
   yum install -y php56w-bcmath
   
-  #yum install -y yum-plugin-replace
-  #yum replace php-common --replace-with=php56w-common
+  yum install -y yum-plugin-replace
+  yum replace php-common --replace-with=php56w-common
 
   
   #/etc/php-fpm.d/www.conf
@@ -177,7 +177,7 @@ then
   setupProject
   setPermission
   
-  curl -sL https://deb.nodesource.com/setup_12.x | bash -
+  #curl -sL https://deb.nodesource.com/setup_12.x | bash -
   yum install -y nodejs
   npm install pm2 -g
   
