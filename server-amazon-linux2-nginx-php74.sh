@@ -100,6 +100,15 @@ function setupProject(){
   echo '    try_files $uri $uri/ /index.php?$query_string;'  >> $NGINX_CONFIG_FILE
   echo '    gzip_static on;'  >> $NGINX_CONFIG_FILE
   echo '  }'  >> $NGINX_CONFIG_FILE
+  echo '  location ~ \.php$ {'  >> $NGINX_CONFIG_FILE
+  echo '        try_files $uri =404;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_split_path_info ^(.+\.php)(/.+)$;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_pass localhost:9000;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_index index.php;'  >> $NGINX_CONFIG_FILE
+  echo '        include fastcgi_params;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'  >> $NGINX_CONFIG_FILE
+  echo '        fastcgi_param PATH_INFO $fastcgi_path_info;'  >> $NGINX_CONFIG_FILE
+  echo '  }'  >> $NGINX_CONFIG_FILE
   echo '}'  >> $NGINX_CONFIG_FILE
   
   systemctl restart nginx
@@ -125,24 +134,6 @@ then
   createSwap
 else
   exit 1;
-fi
-
-if [[ $OS == 'Amazon Linux AMI' ]];
-then
-  yum install -y nginx php74 php74-mysqlnd php74-mbstring php74-xml php74-fpm
-  systemctl start nginx
-  systemctl enable nginx
-  cd /
-  curl -sS https://getcomposer.org/installer -o composer-setup.php
-  php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-  setupProject
-  setPermission
-  curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
-  yum install -y nodejs
-  npm install pm2 -g
-  amazon-linux-extras install epel
-  yum install redis -y
-  systemctl start redis.service
 fi
 
 if [[ $OS == 'Amazon Linux 2' ]];
