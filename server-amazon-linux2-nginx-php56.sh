@@ -170,6 +170,16 @@ then
   #listen.group = nginx
   #listen.mode = 0660
   #
+  sudo sed -i "s/^user = apache$/user = ec2-user/" /etc/php-fpm.d/www.conf
+  sudo sed -i "s/^group = apache$/group = nginx/" /etc/php-fpm.d/www.conf
+ 
+  sudo sed -i "s/^pm.max_children = 50$/pm.max_children = 14/" /etc/php-fpm.d/www.conf
+  sudo sed -i "s/^pm.start_servers = 5$/pm.start_servers = 5/" /etc/php-fpm.d/www.conf
+  sudo sed -i "s/^pm.min_spare_servers = 5$/pm.min_spare_servers = 5/" /etc/php-fpm.d/www.conf
+  sudo sed -i "s/^pm.max_spare_servers = 35$/pm.max_spare_servers = 10/" /etc/php-fpm.d/www.conf
+  
+  systemctl enable php-fpm
+  systemctl restart php-fpm
   
   cd /
   curl -sS https://getcomposer.org/installer -o composer-setup.php
