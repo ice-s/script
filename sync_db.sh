@@ -9,3 +9,12 @@ DB_DES_HOST=""
 DB_DES_USER=""
 DB_DES_PASS=""
 DB_DES_DB_NAME=""
+
+echo -n "Enter DB_SOURCE_HOST: "
+read DB_SOURCE_HOST
+echo -n "Enter DB_SOURCE_USER: "
+read DB_SOURCE_USER
+echo -n "Enter DB_SOURCE_PASS: "
+read DB_SOURCE_PASS
+echo -n "Enter DB_SOURCE_DB_NAME: "
+read DB_SOURCE_DB_NAME
