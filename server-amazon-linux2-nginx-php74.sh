@@ -160,7 +160,7 @@ then
   setupProject
   setPermission
   
-  curl -sL https://deb.nodesource.com/setup_12.x | bash -
+  #curl -sL https://deb.nodesource.com/setup_12.x | bash -
   yum install -y nodejs
   npm install pm2 -g
   
