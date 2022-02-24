@@ -172,7 +172,6 @@ then
   
   #curl -sL https://deb.nodesource.com/setup_12.x | bash -
   rpm -Uvh https://rpm.nodesource.com/pub_10.x/el/7/aarch64/nodejs-10.23.0-1nodesource.aarch64.rpm
-  yum install -y nodejs
   npm install pm2 -g
   
   amazon-linux-extras install epel
