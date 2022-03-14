@@ -170,8 +170,8 @@ then
   setupProject
   setPermission
   
-  #curl -sL https://deb.nodesource.com/setup_12.x | bash -
-  yum install -y nodejs
+  #rpm -Uvh https://rpm.nodesource.com/pub_16.x/el/7/x86_64/nodejs-x.x.x-1nodesource.x86_64.rpm
+  rpm -Uvh https://rpm.nodesource.com/pub_16.x/el/7/x86_64/nodejs-16.13.1-1nodesource.x86_64.rpm
   npm install pm2 -g
   
   amazon-linux-extras install epel
